@@ -1,0 +1,59 @@
+flowchart LR
+    %% Nodos iniciales
+    DS["DataSet\nRRHH"]
+    VC["Variables\nCategóricas"]
+    VN["Variables\nnuméricas"]
+
+    DS --> VC
+    DS --> VN
+
+    %% Rama de Categorización
+    Cat["Categorizar\n(Ej: Alto/medio/bajo)"]
+    VN --> Cat
+
+    %% Unión hacia One-hot Encoder
+    Union(( ))
+    VC --> Union
+    Cat --> Union
+    
+    OHE["One-hot Encoder\n(0-1)\n+ Eliminar Columnas\nRedundantes"]
+    Union --> OHE
+
+    %% Rama de Estandarización
+    Est["Estandarizar"]
+    VN --> Est
+    
+    SS["Standard\nScaler"]
+    MM["Minmax\nScaler"]
+    Est --> SS
+    Est --> MM
+
+    %% PCA
+    PCA["PCA"]
+    OHE --> PCA
+    MM --> PCA
+
+    %% Clustering y Algoritmos
+    Clust["Clustering"]
+    PCA --> Clust
+
+    Alg_1["kmeans / kprototypes / kmodes"]
+    Alg_2["Jerárquico"]
+    Alg_3["DBSCAN"]
+    
+    Clust -.-> Alg_1
+    Clust -.-> Alg_2
+    Clust -.-> Alg_3
+
+    %% Interpretación y resultados
+    Int["Interpretación"]
+    Clust --> Int
+    
+    Carac["Caracterización"]
+    Acc["Acción"]
+    Int --> Carac
+    Int --> Acc
+
+    %% Estilos especiales (Caja roja y Caja discontinua)
+    style Cat stroke:#d92121,stroke-width:2px
+    style PCA stroke-dasharray: 5 5
