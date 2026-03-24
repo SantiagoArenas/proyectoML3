@@ -1,11 +1,36 @@
-El objetivo es identificar causas de fuga, en base a estas proponer soluciones para retener empleados. Un ejemplo es subir el sueldo a todo el mundo, tiene sentido, pero es una solución costosa. En cambio, si identificamos que la causa de fuga es la falta de oportunidades de crecimiento, entonces podemos proponer soluciones como ofrecer cursos de formación o crear un plan de carrera para los empleados. De esta manera, podemos retener a los empleados sin tener que subir el sueldo a todo el mundo.
+---
+name: employee-retention-analysis-agent
+description: Guía para analizar causas de fuga de empleados y proponer acciones de
+  retención accionables.
+---
 
-Del dataset de empleados hay variables categóricas y numéricas. 
-- Las numéricas hay que categorizar (ej alto, medio, bajo) y estandarizar con standard scaler y minmax scaler.
-- Después de categorizar, juntar con las variables categóricas y hacer one hot encoding, eliminando columnas redundantes
-- Elegir si es necario hacer PCA
-- Clusterizar con KMeans/prototpes/nodes, DBSCAN. Debemos ser capaces de interpretar los clusters, es decir, identificar qué características tienen en común los empleados que pertenecen a cada cluster. Esto nos permitirá identificar las causas de fuga y proponer soluciones concretas para retener a los empleados. Por ejemplo, si identificamos un cluster de empleados que tienen una alta rotación, podemos analizar las características de ese cluster para identificar las causas de fuga y proponer soluciones específicas para retener a esos empleados.
-- Interpretar en contexto de la empresa, caracterización y acción. No nos quedaremos con el que de mejor resultado, sino que analizaremos los resultados de cada algoritmo y propondremos acciones concretas para la empresa en base a los resultados obtenidos. Por ejemplo, si el algoritmo de KMeans nos da un cluster de empleados con una alta rotación, podemos analizar las características de ese cluster para identificar las causas de fuga y proponer soluciones específicas para retener a esos empleados. Si el algoritmo de DBSCAN nos da un cluster de empleados con una alta rotación, podemos analizar las características de ese cluster para identificar las causas de fuga y proponer soluciones específicas para retener a esos empleados. DBCV, silhouette, inertia, etc. para evaluar los clusters.
+# Objetivo
+Identificar causas de fuga de empleados y proponer acciones concretas y costo-efectivas para mejorar la retención.
 
+# Datos
+- Fuente: `dataSet_RRHH.csv`
+- Variables: numéricas y categóricas.
+- Requisito: documentar decisiones de limpieza y transformación.
 
-Máximo 10 hojas de PPT o PDF. Cuenta lo que has hecho, cómo lo has hecho y qué has encontrado. Proponer acciones concretas para la empresa. Pasaremos el readme a ppt. El código debe ejecutarse en un ipynb. Debe haber visualizaciones vistosas, claras y siguiendo el mismo estilo. El código debe estar bien comentado y organizado. El readme debe ser claro y conciso, explicando el proceso seguido y los resultados obtenidos. Las acciones propuestas deben ser concretas y basadas en los resultados obtenidos.
+# Metodología
+1. Preprocesar variables numéricas y categóricas.
+2. Categorizar variables numéricas en niveles (bajo/medio/alto) cuando aporte interpretabilidad.
+3. Escalar variables numéricas con `StandardScaler` y `MinMaxScaler` para comparar sensibilidad de algoritmos.
+4. Integrar variables transformadas y aplicar one-hot encoding, eliminando redundancias.
+5. Evaluar uso de PCA para reducción dimensional e interpretabilidad.
+6. Entrenar y comparar clustering con KMeans, K-Prototypes y DBSCAN.
+
+# Evaluación
+- Métricas recomendadas: silhouette, inertia (KMeans), y DBCV cuando aplique a clustering por densidad.
+- Interpretar cada cluster en lenguaje de negocio: perfil del grupo, posible causa de fuga y riesgo asociado.
+- Evitar decisiones basadas únicamente en una métrica; priorizar explicabilidad y accionabilidad.
+
+# Entregables
+- Notebook ejecutable (`.ipynb`) con código claro y comentado.
+- Visualizaciones consistentes y legibles.
+- Resumen para presentación (máximo 10 láminas) con hallazgos y plan de acción.
+- Recomendaciones concretas por segmento de empleados.
+
+# Notas
+- Se eliminaron 0 párrafos duplicados durante la normalización automática.
+- Referencia visual disponible en `mermaidPizarra.mmd`.
